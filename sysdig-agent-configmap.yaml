@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sysdig-agent
+data:
+  dragent.yaml: |
+    configmap: true
+    ### Agent tags
+    # tags: linux:ubuntu,dept:dev,local:nyc
+
+    #### Sysdig Software related config ####
+
+    # **This is the Public Endpoint and TCP port of Sysdig instance deployed 
+    # on US South IBM Cloud. If you create your service in other region visit
+    # https://cloud.ibm.com/docs/monitoring?topic=monitoring-endpoints
+    # and change as needed according to Table 3. List of ingestion 
+    # endpoints and public IP addresses to send data to the IBM Cloud Monitoring
+
+    # **Sysdig collector address
+    collector: ingest.us-south.monitoring.cloud.ibm.com
+
+    # **collector TCP port
+    collector_port: 6443
+
+    # Whether collector accepts ssl:This parameter must be set to true.
+    ssl: true
+
+    # collector certificate validation:This parameter must be set to true.
+    ssl_verify_certificate: true
+
+    #######################################
+    #Other configuration provided on this file can be checked in
+    #https://cloud.ibm.com/docs/monitoring?topic=monitoring-config_agent
+    #Deploying a monitoring agent in a standard Kubernetes cluster manually
+
+    #new_k8s This parameter must be set to true to capture kube state metrics.
+    new_k8s: true
+
+    k8s_cluster_name: <<PUT YOUR OPENSHIFT CLUSTER NAME HERE>>
+
